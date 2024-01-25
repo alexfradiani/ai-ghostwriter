@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import { Moods } from "./initPrompt.js";
 import { newImagePrompt, newTextPrompt } from "./aiService.js";
 const app = express();
-const port = 3000;
+const port = 10000; // required by Render hosting
 
 app.use(express.static("../frontend"));
 app.use(express.json());
