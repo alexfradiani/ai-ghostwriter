@@ -1,0 +1,31 @@
+.pulse {
+  margin: 30px;
+  width: 35.2px;
+  height: 35.2px;
+  border-radius: 50%;
+  background: #e6e6ed;
+  box-shadow: 0 0 0 0 rgba(230, 230, 237, 0.5);
+  animation: pulse-kefe91hg 1.5s infinite linear;
+  position: relative;
+}
+
+.pulse:before,
+.pulse:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 rgba(230, 230, 237, 0.5);
+  animation: inherit;
+  animation-delay: -0.5s;
+}
+
+.pulse:after {
+  animation-delay: -1s;
+}
+
+@keyframes pulse-kefe91hg {
+  100% {
+    box-shadow: 0 0 0 70.4px #0000;
+  }
+}

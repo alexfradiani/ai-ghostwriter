@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Short Story Explorer (OpenAI API experiment)</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="loader.css" />
+    <script src="https://unpkg.com/wavesurfer.js@7"></script>
+  </head>
+  <body>
+    <div id="HeaderInputs">
+      <select id="MoodSelector">
+        <option selected>loading options...</option>
+      </select>
+      <input type="text" id="ManualEntry" placeholder="Start with a word..." />
+      <button id="Run">Make a Story!</button>
+    </div>
+    <div id="Story"></div>
+    <div id="Reset" class="hidden">
+      <button id="ResetButton">Start a New Story</button>
+    </div>
+  </body>
+  <script src="MoodSelector.js"></script>
+  <script src="ManualEntry.js"></script>
+  <script src="RunControl.js"></script>
+  <script src="StoryControl.js"></script>
+  <script src="index.js"></script>
+</html>
