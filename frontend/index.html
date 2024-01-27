@@ -6,19 +6,78 @@
     <title>Short Story Explorer (OpenAI API experiment)</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="loader.css" />
-    <script src="https://unpkg.com/wavesurfer.js@7"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <div id="HeaderInputs">
-      <select id="MoodSelector">
-        <option selected>loading options...</option>
-      </select>
-      <input type="text" id="ManualEntry" placeholder="Start with a word..." />
-      <button id="Run">Make a Story!</button>
+    <div class="p-10 m-3 backdrop-blur-sm bg-slate-950/70 max-w-3xl rounded-xl">
+      <h1
+        class="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl text-white"
+      >
+        Short Story Explorer
+      </h1>
+      <h4 class="mb-4 text-lg leading-none tracking-tight text-slate-300">
+        Powered by OpenAI API text and image generation
+      </h4>
+      <p class="mb-4 text-lg leading-none tracking-tight text-slate-400">
+        You only need to pick a mood, an idea, and let the AI overlords show
+        their creativity...
+      </p>
+      <div id="HeaderInputs" class="flex flex-col md:flex-row">
+        <select id="MoodSelector" class="m-3">
+          <option selected>loading options...</option>
+        </select>
+        <input
+          type="text"
+          id="ManualEntry"
+          placeholder="Start with a word..."
+          class="bg-gray-700 placeholder-gray-400 border border-gray-600 text-white text-sm rounded-lg m-3 focus:ring-blue-500 focus:border-blue-500 block grow p-2.5"
+        />
+        <button
+          id="Run"
+          class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded m-3 inline-flex items-center"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"
+            />
+          </svg>
+          <span>Make a Story</span>
+        </button>
+      </div>
     </div>
-    <div id="Story"></div>
+    <div
+      id="Story"
+      class="hidden flex flex-col items-center justify-center p-10 m-3 backdrop-blur-sm bg-slate-950/70 max-w-3xl rounded-xl"
+    ></div>
+    <div
+      id="Tutorial"
+      class="p-10 m-3 backdrop-blur-sm bg-slate-950/70 min-w-[320px] min-h-[200px] md:min-w-[700px] md:min-h-[437px] max-w-3xl rounded-xl"
+    >
+      <iframe
+        src="https://www.loom.com/embed/5cb7399334fe4087bbd3f02c591ef34c?sid=1a629842-095a-4c9b-94e9-3131934679d6"
+        frameborder="0"
+        webkitallowfullscreen
+        mozallowfullscreen
+        allowfullscreen
+        style="aspect-ratio: 16/9; width: 100%"
+      ></iframe>
+    </div>
     <div id="Reset" class="hidden">
-      <button id="ResetButton">Start a New Story</button>
+      <button
+        id="ResetButton"
+        class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded m-3 mb-10 inline-flex items-center"
+      >
+        Start a New Story
+      </button>
     </div>
   </body>
   <script src="MoodSelector.js"></script>

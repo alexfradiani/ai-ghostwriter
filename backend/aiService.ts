@@ -5,8 +5,6 @@ import {
   buildImagePrompt,
 } from "./initPrompt.js";
 import { ChatCompletionMessageParam } from "openai/resources/index.mjs";
-import path from "path";
-import fs from "fs";
 
 const openai = new OpenAI();
 
@@ -52,21 +50,4 @@ export const newImagePrompt = async (
     size: "1024x1024",
   });
   return response.data[0].url;
-};
-
-export const newAudioPrompt = async (
-  gender: string,
-  text: string,
-  seed: string,
-  count: number
-) => {
-  const speechFile = path.resolve(`../frontend/narration/speech-${count}.mp3`);
-  const mp3 = await openai.audio.speech.create({
-    model: "tts-1",
-    voice: "alloy",
-    input: "Today is a wonderful day to build something people love!",
-  });
-  console.log(speechFile);
-  const buffer = Buffer.from(await mp3.arrayBuffer());
-  await fs.promises.writeFile(speechFile, buffer);
 };

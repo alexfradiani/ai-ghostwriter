@@ -18,6 +18,10 @@ const events = {
       case "FIRST_PROMPT":
         await storyControl.startNewBlock(data);
         break;
+
+      case "AI_RESPONSE":
+        runControl.finishProcessing();
+        break;
     }
   },
 };

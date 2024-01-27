@@ -16,7 +16,10 @@ class StoryControl {
       this.currWord = null;
 
       g.Id("Story").innerHTML = "";
+      g.Id("Story").classList.add("hidden");
+      g.Id("Tutorial").classList.remove("hidden");
       g.Id("Reset").classList.add("hidden");
+      g.Id("ManualEntry").value = "";
     };
   }
 
@@ -40,11 +43,16 @@ class StoryControl {
     this.currTextLoader = this.createTextLoader();
     divContainer.appendChild(this.currTextLoader);
 
+    // hide the tutorial and make the story visible
+    g.Id("Tutorial").classList.add("hidden");
+    g.Id("Story").classList.remove("hidden");
+
     g.Id("Story").appendChild(divContainer);
     this.currContainer = divContainer;
 
     await Promise.all([this.textPrompt(), this.imagePrompt()]);
     this.enableReset();
+    events.emit("AI_RESPONSE", null);
   }
 
   async textPrompt() {
@@ -56,7 +64,7 @@ class StoryControl {
     });
 
     const newText = document.createElement("p");
-    newText.classList.add("storyText");
+    newText.classList.add("storyText", "w-full", "text-white");
     newText.innerHTML = "";
     this.typewrite(
       parser.decode(res.newEntry.content),
@@ -71,16 +79,18 @@ class StoryControl {
 
   typewrite(formattedText, cleanText, element) {
     let i = 0;
+    let origClass = this;
     function type() {
       if (i < cleanText.length) {
         element.innerHTML += cleanText.charAt(i);
         i++;
         setTimeout(type, 50);
+      } else {
+        element.innerHTML = formattedText;
+        origClass.refreshKeys();
       }
-      element.innerHTML = formattedText;
-      this.refreshKeys();
     }
-    type.bind(this)();
+    type();
   }
 
   async imagePrompt() {
@@ -91,7 +101,7 @@ class StoryControl {
       word: this.currWord,
     });
     const html = `<img
-        class="storyImg"
+        class="storyImg rounded-xl"
         src="${res.url}"
         alt="${this.currWord} image"
         width="256"
@@ -100,15 +110,13 @@ class StoryControl {
     this.currImageLoader.innerHTML = html;
   }
 
-  async audioPrompt() {}
-
   /**
    * Creates a loader for the image
    */
   createImgLoader() {
     const loaderContainer = document.createElement("div");
     loaderContainer.innerHTML = `
-      <div class="loaderContainer">
+      <div class="loaderContainer text-white w-full">
         <div class="pulse"></div>
         <p>Loading new image</p>
       </div>
@@ -123,7 +131,7 @@ class StoryControl {
   createTextLoader() {
     const loaderContainer = document.createElement("div");
     loaderContainer.innerHTML = `
-      <div class="loaderContainer">
+      <div class="loaderContainer text-white w-full">
         <div class="pulse"></div>
         <p>Loading new story text</p>
       </div>
